@@ -16,9 +16,12 @@ class LevelSystem(commands.Cog):
         with connection:
             cursor.execute('SELECT experience from member_base WHERE (user_id=?)', (str(user_id),))
             current_exp = cursor.fetchone()
+            cursor.execute('SELECT level from member_base WHERE (user_id=?)', (str(user_id),))
+            level_fetched = cursor.fetchone()
+            level_to_process = int(level_fetched[0])
             current_exp_comparable = int(current_exp[0])
-            if current_exp_comparable is not None:
-                if current_exp_comparable == 5:
+            if current_exp_comparable is not None and level_to_process is not None:
+                if current_exp_comparable == level_to_process ** 2:
                     with connection:
                         cursor.execute('UPDATE member_base SET experience = 0')
                         cursor.execute('SELECT level from member_base WHERE (user_id=?)', (str(user_id),))
@@ -28,8 +31,8 @@ class LevelSystem(commands.Cog):
                             if current_level_comparable < 100:
                                 with connection:
                                     cursor.execute('UPDATE member_base SET level = level+1 WHERE (user_id=?)', (str(user_id),))
-                                    print('level up')
-                                    cursor.execute('UPDATE member_base SET balance = balance+1 WHERE (user_id=?)', (str(user_id),))
+                                    print(f'{self.client.get_user(user_id)} level up to {current_level_comparable + 1}')
+                                    cursor.execute(f'UPDATE member_base SET balance = balance+{(current_level_comparable ** 2) // 2} WHERE (user_id=?)', (str(user_id),))
                             elif current_level_comparable == 100:
                                 print(f'{user_id} has achieved 100 level')
 
@@ -75,7 +78,6 @@ class LevelSystem(commands.Cog):
                     with connection:
                         cursor.execute(f'UPDATE member_base SET balance = balance-{amount} WHERE (user_id=?)', (str(user_id),))
 
-
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.bot:
@@ -90,9 +92,7 @@ class LevelSystem(commands.Cog):
                 with connection:
                     cursor.execute('UPDATE member_base SET experience = experience+1 WHERE (user_id=?)', (str(user_id),))
                     await self.check_for_promotion(user_id)
-        await self.client.process_commands(message)
 
 
 def setup(client):
     client.add_cog(LevelSystem(client))
-

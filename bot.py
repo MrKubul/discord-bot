@@ -8,6 +8,7 @@ client = commands.Bot(command_prefix='$')
 connection = sqlite3.connect('member_base.s3db')
 cursor = connection.cursor()
 
+# TODO refactor kodu, lepszy systemy zdobywania poziomów, inne opcje na betowanie/nagrody, music bot, exception w pogodzie
 
 @client.event
 async def on_ready():
@@ -15,7 +16,7 @@ async def on_ready():
     print('Bot logged in as {0.user}'.format(client))
     with connection:
         cursor.execute(
-            'CREATE TABLE IF NOT EXISTS member_base ( user_id TEXT, level INTEGER, experience INTEGER, balance INTEGER)')
+            'CREATE TABLE IF NOT EXISTS member_base (user_id TEXT, level INTEGER, experience INTEGER, balance INTEGER)')
     for guild in client.guilds:
         if guild.id == 707341420926730334:  # here paste your server id !!
             for member in guild.members:
@@ -27,12 +28,7 @@ async def on_ready():
                             with connection:
                                 cursor.execute('INSERT INTO member_base VALUES (?, ?, ?, ?)', params)
                                 print(f'{member} was inserted to database')
-    with connection:
-        cursor.execute('SELECT * FROM member_base')
-    data = cursor.fetchall()
-    print(data)
     print("Database update ended")
-
 
 @client.command()
 async def load(ctx, extension):
