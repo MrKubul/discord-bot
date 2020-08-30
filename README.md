@@ -1,5 +1,5 @@
 # Discord Bot 
-Simple Discord Bot written in Python using discord.py. 
+Simple Discord Bot written in Python using discord.py 1.5. 
 It has some features like streaming music from youtube, weather forecast, user database and level system.
 
 ## How to use it
