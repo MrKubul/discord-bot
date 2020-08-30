@@ -11,6 +11,7 @@ pip install requests
 pip install beautifulsoup4
 pip install urlib
 pip install youtube_dl
+install ffmpeg and add it to the PATH!
 ```
 
 1. Go to https://discordapp.com/developers/applications and create an application.
