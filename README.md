@@ -11,8 +11,8 @@ pip install requests
 pip install beautifulsoup4
 pip install urlib
 pip install youtube_dl
-install ffmpeg and add it to the PATH!
 ```
+Remember to install ```FFmpeg``` from https://ffmpeg.org/ and add it to your computer's ```PATH```!
 
 1. Go to https://discordapp.com/developers/applications and create an application.
 2. Get your bot token and insert it into first line of the ```token.txt``` file.
