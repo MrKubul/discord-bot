@@ -1,11 +1,18 @@
 # Discord Bot 
-Simple Discord Bot written in Python using discord.py
+Simple Discord Bot written in Python using discord.py 1.5. 
+It has some features like streaming music from youtube, weather forecast, user database and level system.
 
 ## How to use it
-You need to download a module using:
+You need to download following modules :
 ```python
-python3 -m pip install -U discord.py
+py -3 -m pip install -U discord.py[voice]
+pip install asyncio
+pip install requests
+pip install beautifulsoup4
+pip install urlib
+pip install youtube_dl
 ```
+Remember to install ```FFmpeg``` from https://ffmpeg.org/ and add it to your computer's ```PATH```!
 
 1. Go to https://discordapp.com/developers/applications and create an application.
 2. Get your bot token and insert it into first line of the ```token.txt``` file.
