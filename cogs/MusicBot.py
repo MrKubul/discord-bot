@@ -74,6 +74,7 @@ class MusicBot(commands.Cog):
                 main_location = os.path.dirname(holder)
                 song_path = os.path.abspath(os.path.realpath("Queue") + "\\" + first_file)
                 if length != 0:
+                    self.queue_names.pop()
                     print("Song done, playing next queued\n")
                     song_there = os.path.isfile("song.mp3")
                     if song_there:
@@ -215,7 +216,7 @@ class MusicBot(commands.Cog):
         else:
             await ctx.send("Music is not paused")
 
-    @commands.command(pass_context=True, aliases=['s', 'sto'])
+    @commands.command(pass_context=True, aliases=['s'])
     async def skip(self, ctx):
         voice_client = get(self.client.voice_clients, guild=ctx.guild)
 

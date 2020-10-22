@@ -29,8 +29,8 @@ class WeatherForecast(commands.Cog):
         await asyncio.sleep(2)
         city = city.replace(' ', '-')
         data = self.weather_scrapper(city)
-        data = data[1].text.replace('2020', '2020.\n\n')
         try:
+            data = data[1].text.replace('2020', '2020.\n\n')
             await ctx.send(f'{data}')
         except Exception as e:
             await ctx.send("You probably spelled that wrong")

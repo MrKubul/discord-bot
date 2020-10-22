@@ -18,7 +18,7 @@ async def on_ready():
         cursor.execute(
             'CREATE TABLE IF NOT EXISTS member_base (user_id TEXT, level INTEGER, experience INTEGER, balance INTEGER)')
     for guild in client.guilds:
-        if guild.id == 707341420926730334:  # here paste your server id !!
+        if guild.id == int(server_id):
             for member in guild.members:
                 if not member.bot:
                     with connection:
@@ -54,5 +54,7 @@ for file in os.listdir('./cogs'):
         client.load_extension(f'cogs.{file[:-3]}')
 
 token_file = open("token.txt", "r")
-token = token_file.readline()
+user_data = token_file.readlines()
+token = user_data[0]
+server_id = user_data[1]
 client.run(token)
