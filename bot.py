@@ -8,8 +8,6 @@ client = commands.Bot(command_prefix='$')
 connection = sqlite3.connect('member_base.s3db')
 cursor = connection.cursor()
 
-# TODO refactor kodu, lepszy systemy zdobywania poziomów, inne opcje na betowanie/nagrody, music bot, exception w pogodzie
-
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Game("https://github.com/MrKubul/discord-bot"))
